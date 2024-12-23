@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const userRouter = require('./routes/user.routes')
 const dotenv = require('dotenv');
-
+const cookieParser = require('cookie-parser');
+const indexRouter=require('./routes/index.routes');
+app.use(cookieParser());
 
 dotenv.config();
 const connectToDB= require('./config/db');
@@ -17,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // Sample route
+app.use('/',indexRouter);
 app.use('/user',userRouter);
 
 
